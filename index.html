@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.1/font/bootstrap-icons.css">
+</head>
+<body>
+
+    <div class="todoApp">
+
+        <form action="">
+            <input type="text" name="" id="todoText">
+             <input type="submit" value="დაამატე " id="todoAdd">
+          
+
+
+        </form>
+        <h2>Todos</h2>
+        <div id="todos">
+          
+        </div>
+
+    </div>
+
+
+
+
+
+
+
+
+
+
+    <script>
+        
+
+        class Todo{
+            
+            constructor(text,isDone){
+                this.text = text
+                this.isDone = isDone
+            }
+        
+        }
+
+        let Todobject = []
+
+
+
+
+
+
+        let Todotext = document.querySelector("#todoText")
+        let Addbutton = document.querySelector("#todoAdd")
+        let Todos = document.querySelector("#todos")
+
+
+
+
+        Addbutton.addEventListener("click",function(event){
+            event.preventDefault()
+           
+            let todoDiv = document.createElement("div")
+            todoDiv.classList.add("todo")
+      
+
+
+            let checkbox = document.createElement("input")
+            checkbox.setAttribute("type","checkbox")
+            checkbox.setAttribute("id","Checkdone")
+            checkbox.checked = false;
+
+            let Todospan = document.createElement("span")
+            Todospan.textContent = todoText.value;
+            let Deletephoto = document.createElement("span")
+            Deletephoto.textContent = "X"
+
+            
+
+            todoDiv.appendChild(checkbox)
+            todoDiv.appendChild(Todospan)
+            todoDiv.appendChild(Deletephoto)
+       
+
+            Todos.append(todoDiv)
+           
+            let todotxt = todoText.value;
+            let istodoDone = checkbox.checked;
+            let TodoObjects = new Todo(todotxt,istodoDone)
+            Todobject.push(TodoObjects)
+
+            localStorage.setItem("todos", JSON.stringify(Todobject))
+
+
+
+            Deletephoto.addEventListener("click", function(){
+                this.parentElement.remove()
+            })
+
+            checkbox.addEventListener("click",function(){
+
+if(this.checked){
+    let chkbox = this;
+    
+    Todobject.forEach(function(todo){
+        if(chkbox.nextElementSibling.innterText == todo.Text){
+           
+            todo.isDone = true;
+            chkbox.checked = true;
+        }
+        
+    })
+    localStorage.setItem("todos", JSON.stringify(Todobject));
+}
+
+
+})
+  
+
+           
+        })
+        window.onload = function(){
+                let localStorageTodo = JSON.parse(localStorage.getItem("todos"))
+                Todobject = localStorageTodo;
+                if(!Todobject) {
+                    Todobject = [];
+                }
+                Todobject.forEach(function(todo){
+                    
+
+                    let todoDiv = document.createElement("div")
+                        todoDiv.classList.add("todo")
+      
+
+
+                        let checkbox = document.createElement("input")
+                         checkbox.setAttribute("type","checkbox")
+                        checkbox.setAttribute("id","Checkdone")
+                        checkbox.checked = todo.isDone;
+
+                        let Todospan = document.createElement("span")
+                        Todospan.textContent = todo.text;
+                        let Deletephoto = document.createElement("span")
+                        Deletephoto.textContent = " X"
+
+                        Deletephoto.addEventListener("click", function(){
+                        this.parentElement.remove()
+                        let clickX = this
+                        Todobject.forEach(function (todo) {
+                            if(clickX.previousElementSibling.innerText == todo.text){
+                                 let Filtered =  Todobject.filter(function(todoTodelete){
+                                     return todoTodelete != todo;
+
+                                     Todobject = Filtered;
+                                     localStorage.setItem("todos", JSON.stringify(Todobject))
+                                })
+                            }
+                            
+                        })
+
+                        }) 
+                        
+
+                      
+                        
+
+                        checkbox.addEventListener("click",function(){
+
+                            if(this.checked){
+                                let chkbox = this;
+                                
+                                Todobject.forEach(function(todos){
+                                    if(chkbox.nextElementSibling.innerText == todos.text){
+                                       
+                                        todos.isDone = true;
+                                        chkbox.checked = true;
+                                    }
+                                    
+                                })
+                                localStorage.setItem("todos", JSON.stringify(Todobject));
+                            }
+                            else{
+                                let chkbox = this;
+                                
+                                Todobject.forEach(function(todos){
+                                    if(chkbox.nextElementSibling.innerText == todos.text){
+                                       
+                                        todos.isDone = false;
+                                        chkbox.checked = false;
+                                    }
+                                    
+                                })
+                                localStorage.setItem("todos", JSON.stringify(Todobject));
+
+                            }
+
+                        })
+                        
+                        todoDiv.appendChild(checkbox)
+                        todoDiv.appendChild(Todospan)
+                        todoDiv.appendChild(Deletephoto)
+       
+
+                        Todos.append(todoDiv)
+                })
+               
+            }
+
+
+
+
+        
+    </script>
+    
+</body>
+</html>

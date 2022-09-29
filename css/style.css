@@ -1,0 +1,65 @@
+/* body{
+    background-color: black;
+} */
+
+
+.todoApp{
+    width: 900px;
+    height: 600px;
+    margin: auto;
+    margin-top: 100px;
+    border: 2px solid blue;
+    border-radius: 30px;
+    background-color: rgb(158, 86, 86)
+}
+.todoApp h1 {
+    text-align: center;
+    font-style: italic;
+    color: rgb(3, 3, 129);
+}
+#todoText{
+    padding: 8px 10px;
+    border-radius: 20px;
+    border-color: blue;
+    width: 290px;
+    font-size: 20px;
+    margin-top: 100px;
+}
+#todoAdd{
+    border: none;
+    border-radius: 20px;
+    font-size: 20px;
+    background-color: blue;
+    color: white;
+    cursor: pointer;
+    border: 1px solid blue;
+    padding: 5px 10px;
+    
+}
+form{
+    text-align: center;
+
+}
+.todoApp h2 {
+    text-align: center;
+    font-size: 30px;
+    color: blue;
+    
+}
+
+#todos{
+    width: 75%;
+    margin: auto;
+    padding-left: 100px;
+    font-size: 25px;
+    color: blue;
+}
+#todo span {
+    font-weight: bold;
+    color: blue ;
+    
+}
+.todo #Checkdone:checked + span{
+    color: white;
+
+}
